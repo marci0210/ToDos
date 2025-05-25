@@ -1,5 +1,5 @@
 <?php
-    include("config.php");
+    require_once 'db.php';
     session_start();
 
     $userid = $_SESSION['login_user'][1];
