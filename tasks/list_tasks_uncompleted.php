@@ -5,7 +5,7 @@
 	                inner join groups on groups.group_id = tasks.group_id
                     inner join users_groups on users_groups.group_id = groups.group_id
                     inner join users on users_groups.user_id = users.user_id
-                    where users.user_id = '$userid' and tasks.completed=0
+                    where users.user_id = '$userid' and tasks.completed=B'0'
                     order by tasks.due_date is null, tasks.due_date asc, groups.group_name, tasks.task_description;";
 
     $tasks = pg_query($db, $sql_tasks);
