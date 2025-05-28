@@ -11,12 +11,22 @@ $host = $db['host'];
 $port = $db['port'];
 $user = $db['user'];
 $pass = $db['pass'];
-$name = ltrim($db['path'], '/');
+$dbname = ltrim($db['path'], '/');
 
-try {
-    $pdo = new PDO("pgsql:host=$host;port=$port;dbname=$name", $user, $pass);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    die("Error with connection: " . $e->getMessage());
+$conn_string = sprintf(
+    "host=%s port=%s dbname=%s user=%s password=%s",
+    $host,
+    $port,
+    $dbname,
+    $user,
+    $pass
+);
+
+$dbconn = pg_connect($conn_string);
+
+if (!$dbconn) {
+    die("Error: Could not connect to database");
 }
+
+return $dbconn;
 ?>

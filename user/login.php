@@ -10,7 +10,7 @@
         where users.username='$username'";
         $result = pg_query($db, $query);
 
-        $row = pg_fetch_array($result, MYSQLI_ASSOC);
+        $row = pg_fetch_assoc($result);
         $count = pg_num_rows($result);
 
         $password_ver = password_verify($password, $row["password"]);
