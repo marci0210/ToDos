@@ -5,13 +5,13 @@ if (!$db_url) {
     die("Error: DATABASE_URL not found");
 }
 
-$db = parse_url($db_url);
+$db_parsed_url = parse_url($db_url);
 
-$host = $db['host'];
-$port = $db['port'];
-$user = $db['user'];
-$pass = $db['pass'];
-$dbname = ltrim($db['path'], '/');
+$host = $db_parsed_url['host'];
+$port = $db_parsed_url['port'];
+$user = $db_parsed_url['user'];
+$pass = $db_parsed_url['pass'];
+$dbname = ltrim($db_parsed_url['path'], '/');
 
 $conn_string = sprintf(
     "host=%s port=%s dbname=%s user=%s password=%s",
@@ -22,7 +22,7 @@ $conn_string = sprintf(
     $pass
 );
 
-$dbconn = pg_connect($conn_string);
+$db = pg_connect($conn_string);
 
 if (!$dbconn) {
     die("Error: Could not connect to database");
