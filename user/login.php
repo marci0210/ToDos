@@ -8,10 +8,10 @@
         $query = "select * from users 
         left outer join settings on users.user_id = settings.user_id
         where users.username='$username'";
-        $result = mysqli_query($db, $query);
+        $result = pg_query($db, $query);
 
-        $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
-        $count = mysqli_num_rows($result);
+        $row = pg_fetch_array($result, MYSQLI_ASSOC);
+        $count = pg_num_rows($result);
 
         $password_ver = password_verify($password, $row["password"]);
 
@@ -28,7 +28,7 @@
             $_SESSION['login_user'] = array();
             array_push($_SESSION['login_user'], $row['username'], $row['user_id']);   
 
-            mysqli_close($db);
+            pg_close($db);
             header("location: ../todo.php");
         }
         else{
@@ -37,10 +37,10 @@
 
             setcookie($cookie_name, $cookie_value, time() + 5, "/");
 
-            mysqli_close($db);
+            pg_close($db);
             header("location: ../todo.php");
         }
     }
 
-    mysqli_close($db);
+    pg_close($db);
 ?>

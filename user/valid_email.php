@@ -6,14 +6,14 @@
     $query="SELECT users.user_id FROM users 
         where users.email = '$q'";
 
-    $result = mysqli_query($db, $query);
+    $result = pg_query($db, $query);
 
-    if(mysqli_num_rows($result) == 0){
+    if(pg_num_rows($result) == 0){
         echo  "0";
     }
-    else if(mysqli_num_rows($result) == 1){
+    else if(pg_num_rows($result) == 1){
         echo  "1";
     }
 
-    mysqli_close($db);
+    pg_close($db);
 ?>

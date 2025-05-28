@@ -7,7 +7,7 @@
         where users.user_id = '$userid';";
 
 
-    $groups = mysqli_query($db, $sql_groups);
+    $groups = pg_query($db, $sql_groups);
 
     while($row = $groups->fetch_assoc()) {
         echo '<li style="width: 100%">';

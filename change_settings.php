@@ -12,14 +12,14 @@
         $update_query = "update settings 
         set background_color = '$bckc', font_color = '$c' 
         where user_id = '$userid'; ";
-        mysqli_query($db, $update_query);
+        pg_query($db, $update_query);
 
         setcookie("font_color", $c);
         setcookie("background_color", $bckc);
 
-        mysqli_close($db);
+        pg_close($db);
         header("location: todo.php");
     }
 
-    mysqli_close($db);
+    pg_close($db);
 ?>

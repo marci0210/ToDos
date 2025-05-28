@@ -13,11 +13,11 @@
         else{
             $add_query = "insert into tasks (task_description, due_date, group_id, completed) values ('$task_description', '$task_date', $task_group, 0);";
         }
-        $result = mysqli_query($db, $add_query);
+        $result = pg_query($db, $add_query);
 
-        mysqli_close($db);
+        pg_close($db);
         header("location: ../todo.php");
     }
 
-    mysqli_close($db);
+    pg_close($db);
 ?>

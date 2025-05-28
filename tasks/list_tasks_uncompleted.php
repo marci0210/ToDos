@@ -8,7 +8,7 @@
                     where users.user_id = '$userid' and tasks.completed=0
                     order by tasks.due_date is null, tasks.due_date asc, groups.group_name, tasks.task_description;";
 
-    $tasks = mysqli_query($db, $sql_tasks);
+    $tasks = pg_query($db, $sql_tasks);
 
     while($row = $tasks->fetch_assoc()) {
         $task_id = $row["task_id"];

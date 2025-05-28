@@ -11,13 +11,13 @@
         inner join users on users_groups.user_id = users.user_id
         where groups.group_id = '$q' and users.user_id != '$userid'";
 
-    $result = mysqli_query($db, $query);
+    $result = pg_query($db, $query);
 
-    if(mysqli_num_rows($result) == 0){
+    if(pg_num_rows($result) == 0){
         echo "<p>You haven't added anyone yet.</p>";
     }
     else{
-        while($row = mysqli_fetch_array($result)) {
+        while($row = pg_fetch_array($result)) {
             echo '<div class="added_users">';
             echo '<div class="dv"><p>'. $row['username'] .'</p></div>';
             
