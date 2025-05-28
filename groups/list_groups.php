@@ -8,7 +8,7 @@
     
     $groups = pg_query($db, $sql_groups);
 
-    while($row = $groups->fetch_assoc()) {
+    while($row = pg_fetch_assoc($groups)) {
         echo '<option class="dropdown" value="'.$row["group_id"].'">'.$row["group_name"]. '</option>';
     }
 ?>

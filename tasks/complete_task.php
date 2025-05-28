@@ -7,7 +7,7 @@
 
         $first_query = "select completed from tasks where task_id = $task_id;";
         $result = pg_query($db, $first_query);
-        $row = $result->fetch_assoc();
+        $row = pg_fetch_assoc($result);
 
         if($row["completed"] == 0 )
         {

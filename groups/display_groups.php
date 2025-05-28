@@ -9,7 +9,7 @@
 
     $groups = pg_query($db, $sql_groups);
 
-    while($row = $groups->fetch_assoc()) {
+    while($row = pg_fetch_assoc($groups)) {
         echo '<li style="width: 100%">';
 
         echo '<a href="#" id="' . $row["group_id"] . '" onclick="group_filter(this.id)">';

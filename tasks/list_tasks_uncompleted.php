@@ -10,7 +10,7 @@
 
     $tasks = pg_query($db, $sql_tasks);
 
-    while($row = $tasks->fetch_assoc()) {
+    while($row = pg_fetch_assoc($tasks)) {
         $task_id = $row["task_id"];
         echo '<li class="e">';
 
