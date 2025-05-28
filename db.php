@@ -24,9 +24,9 @@ $conn_string = sprintf(
 
 $db = pg_connect($conn_string);
 
-if (!$dbconn) {
+if (!$db) {
     die("Error: Could not connect to database");
 }
 
-return $dbconn;
+return $db;
 ?>
