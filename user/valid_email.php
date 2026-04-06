@@ -1,5 +1,5 @@
 <?php
-    include("../config.php");
+    require_once __DIR__ . '/../db.php';
 
     $q = $_GET['q'];
 

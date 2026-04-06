@@ -6,7 +6,7 @@
         exit;
     }
 
-    include("config.php");
+    require_once 'db.php';
 
     /*Session check*/
     session_start();
