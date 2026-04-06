@@ -46,34 +46,19 @@
         }
         function set_wallpaper(){
             var x = window.innerWidth;
-            var y = window.innerHeight;
+            var orientation = x > 1080 ? 'landscape' : 'portrait';
 
-            if(x > 1080){
-                const unsplashUrl = `https://api.unsplash.com/photos/random?client_id=${accessKey}&query=nature&orientation=landscape`;
+            const proxyUrl = `/unsplash_proxy.php?orientation=${orientation}`;
 
-                fetch(unsplashUrl)
-                    .then(response => response.json())
-                    .then(data => {
-                        var imageUrl = data.urls.full;
-                        document.body.style.backgroundImage = `url('${imageUrl}')`;
-                        document.body.style.backgroundSize = "cover";
-                        document.body.style.backgroundPosition = "center";
-                    })
-                    .catch(error => console.error('Error:', error));
-            }
-            else{
-                const unsplashUrl = `https://api.unsplash.com/photos/random?client_id=${accessKey}&query=nature&orientation=portrait`;
-
-                fetch(unsplashUrl)
-                    .then(response => response.json())
-                    .then(data => {
-                        var imageUrl = data.urls.full;
-                        document.body.style.backgroundImage = `url('${imageUrl}')`;
-                        document.body.style.backgroundSize = "cover";
-                        document.body.style.backgroundPosition = "center";
-                    })
-                    .catch(error => console.error('Error:', error));
-            }
+            fetch(proxyUrl)
+                .then(response => response.json())
+                .then(data => {
+                    var imageUrl = data.urls.full;
+                    document.body.style.backgroundImage = `url('${imageUrl}')`;
+                    document.body.style.backgroundSize = "cover";
+                    document.body.style.backgroundPosition = "center";
+                })
+                .catch(error => console.error('Error:', error));
         }
         function set_background(){
             var bgc = <?php echo json_encode($_COOKIE['background_color']);?>;
