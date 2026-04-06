@@ -6,9 +6,9 @@
     inner join users on users.user_id = users_groups.user_id
     where users.user_id = '$userid';";
     
-    $groups = mysqli_query($db, $sql_groups);
+    $groups = pg_query($db, $sql_groups);
 
-    while($row = $groups->fetch_assoc()) {
+    while($row = pg_fetch_assoc($groups)) {
         echo '<option class="dropdown" value="'.$row["group_id"].'">'.$row["group_name"]. '</option>';
     }
 ?>

@@ -10,11 +10,11 @@
         $a = "delete from tasks where group_id = '$delete_group_id';";
         $b = "delete from groups where group_id = '$delete_group_id';";
         $c = "delete from users_groups where group_id = '$delete_group_id';";
-        mysqli_query($db, $a);
-        mysqli_query($db, $c);
-        mysqli_query($db, $b);
-        mysqli_close($db);
+        pg_query($db, $a);
+        pg_query($db, $c);
+        pg_query($db, $b);
+        pg_close($db);
         header("location: ../todo.php");
     }
-    mysqli_close($db);
+    pg_close($db);
 ?>

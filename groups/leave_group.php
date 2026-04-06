@@ -8,9 +8,9 @@
         $leave_group_id = $_POST['button'];
 
         $a = "delete from users_groups where group_id = '$leave_group_id' and user_id = '$userid';";
-        mysqli_query($db, $a);
-        mysqli_close($db);
+        pg_query($db, $a);
+        pg_close($db);
         header("location: ../todo.php");
     }
-    mysqli_close($db);
+    pg_close($db);
 ?>

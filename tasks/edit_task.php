@@ -14,7 +14,7 @@
                 group_id =  $task_group 
                 where task_id = $task_id ;";
 
-            mysqli_query($db, $edit_query);
+            pg_query($db, $edit_query);
         }
         else{
             $edit_query = "update tasks set 
@@ -22,11 +22,11 @@
                 group_id = $task_group  ,
                 due_date =  '$task_date'  
                 where task_id =  $task_id  ;";
-            mysqli_query($db, $edit_query);
+            pg_query($db, $edit_query);
         }
-        mysqli_close($db);
+        pg_close($db);
         header("location: ../todo.php");
     }
-    mysqli_close($db);
+    pg_close($db);
     
 ?>

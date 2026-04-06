@@ -5,18 +5,28 @@ if (!$db_url) {
     die("Error: DATABASE_URL not found");
 }
 
-$db = parse_url($db_url);
+$db_parsed_url = parse_url($db_url);
 
-$host = $db['host'];
-$port = $db['port'];
-$user = $db['user'];
-$pass = $db['pass'];
-$name = ltrim($db['path'], '/');
+$host = $db_parsed_url['host'];
+$port = $db_parsed_url['port'];
+$user = $db_parsed_url['user'];
+$pass = $db_parsed_url['pass'];
+$dbname = ltrim($db_parsed_url['path'], '/');
 
-try {
-    $pdo = new PDO("pgsql:host=$host;port=$port;dbname=$name", $user, $pass);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    die("Error with connection: " . $e->getMessage());
+$conn_string = sprintf(
+    "host=%s port=%s dbname=%s user=%s password=%s",
+    $host,
+    $port,
+    $dbname,
+    $user,
+    $pass
+);
+
+$db = pg_connect($conn_string);
+
+if (!$db) {
+    die("Error: Could not connect to database");
 }
+
+return $db;
 ?>
