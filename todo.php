@@ -32,6 +32,7 @@
     <script type="text/javascript" src="settings.js"></script>
     <script type="text/javascript" src="filters.js"></script>
     <script type="text/javascript" src="sql_injection.js"></script>
+    <script type="text/javascript" src="config.js"></script>
     <script type="text/javascript">
         function start(){
             set_wallpaper();
@@ -46,16 +47,30 @@
             var y = window.innerHeight;
 
             if(x > 1080){
-                var daily= "https://source.unsplash.com/1920x1080/daily?nature";
-                var b = "url(" + daily + ")";
+                const unsplashUrl = `https://api.unsplash.com/photos/random?client_id=${accessKey}&query=nature&orientation=landscape`;
 
-                document.getElementById("body").style.backgroundImage = b;
+                fetch(unsplashUrl)
+                    .then(response => response.json())
+                    .then(data => {
+                        var imageUrl = data.urls.full;
+                        document.body.style.backgroundImage = `url('${imageUrl}')`;
+                        document.body.style.backgroundSize = "cover";
+                        document.body.style.backgroundPosition = "center";
+                    })
+                    .catch(error => console.error('Error:', error));
             }
             else{
-                var daily= "https://source.unsplash.com/1080x1920/daily?nature";
-                var b = "url(" + daily + ")";
+                const unsplashUrl = `https://api.unsplash.com/photos/random?client_id=${accessKey}&query=nature&orientation=portrait`;
 
-                document.getElementById("body").style.backgroundImage = b;
+                fetch(unsplashUrl)
+                    .then(response => response.json())
+                    .then(data => {
+                        var imageUrl = data.urls.full;
+                        document.body.style.backgroundImage = `url('${imageUrl}')`;
+                        document.body.style.backgroundSize = "cover";
+                        document.body.style.backgroundPosition = "center";
+                    })
+                    .catch(error => console.error('Error:', error));
             }
         }
         function set_background(){
