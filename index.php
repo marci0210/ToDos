@@ -1,5 +1,7 @@
 <?php
-    if (empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] === "off") {
+    $proto = $_SERVER['HTTP_X_FORWARDED_PROTO'] ?? 'http';
+    
+    if ($proto !== 'https') {
         $location = 'https://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
         header('HTTP/1.1 301 Moved Permanently');
         header('Location: ' . $location);
